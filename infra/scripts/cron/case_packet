@@ -1,0 +1,5 @@
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+DATA_BASE_PATH=/data
+
+0 2 * * * root /app/run_case_packet_job.sh >> /proc/1/fd/1 2>> /proc/1/fd/2

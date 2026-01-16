@@ -1,0 +1,507 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "party_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "party_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "party_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "industry": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "country": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "onboarding_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "expected_monthly_volume_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "expected_avg_txn_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "risk_rating": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "case_window_start_ms_utc": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "case_window_end_ms_utc": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "alerts_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "alerts_high": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "alerts_medium": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "alerts_low": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "max_risk_score": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "median_risk_score": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "model_types": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "scenario_codes": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "severities": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "txn_count_case": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "amount_total_usd_case": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "median_amount_usd_case": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "max_amount_usd_case": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "first_txn_ms_utc_case": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "last_txn_ms_utc_case": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "intl_ratio_case": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "instrument_types_case": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "alerts": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "ts": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64"
+          },
+          "alert_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "model_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "scenario_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "risk_score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "severity": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "trigger_summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "supporting_txn_ids": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "amount_total_usd": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "txn_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "features_json": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "data_quality_flags": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    "top_counterparties": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "amount_total_usd": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "txn_count": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "intl_ratio": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "last_txn_ms_utc": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64"
+          },
+          "counterparty_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "txn_count"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "top_merchants": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "amount_total_usd": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "txn_count": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "last_txn_ms_utc": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64"
+          },
+          "merchant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "merchant_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "merchant_category": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "txn_count"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "supporting_transactions": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "ts": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64"
+          },
+          "txn_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "instrument_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "direction": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "amount": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "currency": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "merchant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "channel": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "is_international": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}

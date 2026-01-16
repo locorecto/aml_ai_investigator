@@ -1,0 +1,212 @@
+{
+  "transactions.csv": [
+    [
+      "txn_id",
+      "string"
+    ],
+    [
+      "party_id",
+      "string"
+    ],
+    [
+      "account_id",
+      "string"
+    ],
+    [
+      "instrument_type",
+      "string: cash|wires|credit_cards|loans|ngi"
+    ],
+    [
+      "txn_timestamp_ms_utc",
+      "long epoch ms UTC"
+    ],
+    [
+      "direction",
+      "string: debit|credit"
+    ],
+    [
+      "amount",
+      "double"
+    ],
+    [
+      "currency",
+      "string"
+    ],
+    [
+      "counterparty_id",
+      "string"
+    ],
+    [
+      "merchant_id",
+      "string nullable"
+    ],
+    [
+      "channel",
+      "string"
+    ],
+    [
+      "country",
+      "string"
+    ],
+    [
+      "state",
+      "string nullable"
+    ],
+    [
+      "is_international",
+      "int 0/1"
+    ],
+    [
+      "description",
+      "string"
+    ]
+  ],
+  "parties.csv": [
+    [
+      "party_id",
+      "string"
+    ],
+    [
+      "party_type",
+      "string individual|business"
+    ],
+    [
+      "party_name",
+      "string"
+    ],
+    [
+      "industry",
+      "string nullable"
+    ],
+    [
+      "country",
+      "string"
+    ],
+    [
+      "state",
+      "string nullable"
+    ],
+    [
+      "onboarding_date",
+      "string YYYY-MM-DD"
+    ],
+    [
+      "expected_monthly_volume_usd",
+      "double"
+    ],
+    [
+      "expected_avg_txn_usd",
+      "double"
+    ],
+    [
+      "risk_rating",
+      "string low|medium|high"
+    ]
+  ],
+  "counterparties.csv": [
+    [
+      "counterparty_id",
+      "string"
+    ],
+    [
+      "counterparty_type",
+      "string individual|business"
+    ],
+    [
+      "country",
+      "string"
+    ]
+  ],
+  "merchants.csv": [
+    [
+      "merchant_id",
+      "string"
+    ],
+    [
+      "merchant_name",
+      "string"
+    ],
+    [
+      "merchant_category",
+      "string"
+    ],
+    [
+      "country",
+      "string"
+    ],
+    [
+      "state",
+      "string nullable"
+    ]
+  ],
+  "alerts_<model>.csv": [
+    [
+      "alert_id",
+      "string"
+    ],
+    [
+      "party_id",
+      "string"
+    ],
+    [
+      "party_type",
+      "string nullable; join from parties"
+    ],
+    [
+      "model_type",
+      "string"
+    ],
+    [
+      "model_version",
+      "string"
+    ],
+    [
+      "scenario_code",
+      "string"
+    ],
+    [
+      "alert_timestamp_ms_utc",
+      "long epoch ms UTC"
+    ],
+    [
+      "window_start_ms_utc",
+      "long"
+    ],
+    [
+      "window_end_ms_utc",
+      "long"
+    ],
+    [
+      "risk_score",
+      "double 0-100"
+    ],
+    [
+      "severity",
+      "string low|medium|high"
+    ],
+    [
+      "trigger_summary",
+      "string"
+    ],
+    [
+      "supporting_txn_ids",
+      "string pipe-delimited txn_id list"
+    ],
+    [
+      "amount_total_usd",
+      "double"
+    ],
+    [
+      "txn_count",
+      "int"
+    ],
+    [
+      "features_json",
+      "string JSON"
+    ],
+    [
+      "data_quality_flags",
+      "string pipe-delimited flags"
+    ]
+  ]
+}

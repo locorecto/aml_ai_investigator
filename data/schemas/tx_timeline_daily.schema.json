@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "party_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "txn_date_utc": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "instrument_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "txn_count": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "amount_total_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "txn_count"
+  ],
+  "additionalProperties": false
+}

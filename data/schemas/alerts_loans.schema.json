@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "alert_id": {
+      "type": "string"
+    },
+    "party_id": {
+      "type": "string"
+    },
+    "party_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_type": {
+      "type": "string"
+    },
+    "model_version": {
+      "type": "string"
+    },
+    "scenario_code": {
+      "type": "string"
+    },
+    "alert_timestamp_ms_utc": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "window_start_ms_utc": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "window_end_ms_utc": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "risk_score": {
+      "type": "number"
+    },
+    "severity": {
+      "type": "string"
+    },
+    "trigger_summary": {
+      "type": "string"
+    },
+    "supporting_txn_ids": {
+      "type": "string"
+    },
+    "amount_total_usd": {
+      "type": "number"
+    },
+    "txn_count": {
+      "type": "integer"
+    },
+    "features_json": {
+      "type": "string"
+    },
+    "data_quality_flags": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "alert_id",
+    "party_id",
+    "model_type",
+    "model_version",
+    "scenario_code",
+    "alert_timestamp_ms_utc",
+    "window_start_ms_utc",
+    "window_end_ms_utc",
+    "risk_score",
+    "severity",
+    "trigger_summary",
+    "supporting_txn_ids",
+    "amount_total_usd",
+    "txn_count",
+    "features_json",
+    "data_quality_flags"
+  ],
+  "additionalProperties": false
+}

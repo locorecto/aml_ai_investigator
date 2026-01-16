@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "party_id": {
+      "type": "string"
+    },
+    "party_type": {
+      "type": "string"
+    },
+    "party_name": {
+      "type": "string"
+    },
+    "industry": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "country": {
+      "type": "string"
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "onboarding_date": {
+      "type": "string"
+    },
+    "expected_monthly_volume_usd": {
+      "type": "number"
+    },
+    "expected_avg_txn_usd": {
+      "type": "number"
+    },
+    "risk_rating": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "party_id",
+    "party_type",
+    "party_name",
+    "country",
+    "onboarding_date",
+    "expected_monthly_volume_usd",
+    "expected_avg_txn_usd",
+    "risk_rating"
+  ],
+  "additionalProperties": false
+}

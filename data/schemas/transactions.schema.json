@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "txn_id": {
+      "type": "string"
+    },
+    "party_id": {
+      "type": "string"
+    },
+    "account_id": {
+      "type": "string"
+    },
+    "instrument_type": {
+      "type": "string"
+    },
+    "txn_timestamp_ms_utc": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "direction": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "counterparty_id": {
+      "type": "string"
+    },
+    "merchant_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "channel": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_international": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "txn_id",
+    "party_id",
+    "account_id",
+    "instrument_type",
+    "txn_timestamp_ms_utc",
+    "direction",
+    "amount",
+    "currency",
+    "counterparty_id",
+    "channel",
+    "country",
+    "is_international",
+    "description"
+  ],
+  "additionalProperties": false
+}
