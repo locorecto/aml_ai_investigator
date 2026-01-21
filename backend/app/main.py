@@ -3,13 +3,15 @@ import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.api import api_router
 from app.core.config import build_data_paths, get_settings
 from app.core.logging import configure_logging
-from app.llm.provider import OpenAIChatProvider
+from app.llm.provider import MockChatProvider, OpenAIChatProvider
 from app.services.case_service import CaseDataAccess
 from app.services.copilot_service import CopilotService
+from app.services.feedback_service import FeedbackService
 
 logger = logging.getLogger(__name__)
 
@@ -24,12 +26,16 @@ async def lifespan(app: FastAPI):
         if not path.exists():
             logger.warning("Dataset path missing", extra={"dataset": name, "path": str(path)})
     app.state.case_data_access = CaseDataAccess(data_paths)
-    if settings.llm_api_key:
+    if settings.llm_base_url == "mock":
+        llm_provider = MockChatProvider()
+        logger.info("Using mock LLM provider")
+    elif settings.llm_api_key:
         llm_provider = OpenAIChatProvider(settings.llm_api_key, settings.llm_base_url)
     else:
         llm_provider = OpenAIChatProvider("", settings.llm_base_url)
         logger.warning("LLM_API_KEY is not set; copilot calls will fail")
     app.state.copilot_service = CopilotService(settings, llm_provider)
+    app.state.feedback_service = FeedbackService(settings.artifacts_path)
     logger.info("Case data access initialized")
     yield
 
@@ -37,6 +43,18 @@ async def lifespan(app: FastAPI):
 def create_app() -> FastAPI:
     settings = get_settings()
     app = FastAPI(title=settings.app_name, lifespan=lifespan)
+    cors_origins = [
+        origin.strip()
+        for origin in settings.cors_allow_origins.split(",")
+        if origin.strip()
+    ]
+    if cors_origins:
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=cors_origins,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
 
     @app.middleware("http")
     async def request_logger(request: Request, call_next):

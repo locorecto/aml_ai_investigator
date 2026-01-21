@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.log
+
+# Virtual envs
+.venv/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Artifacts and runtime data
+artifacts/
+data/**/*.parquet
+data/**/*.crc
+
+# OS
+.DS_Store

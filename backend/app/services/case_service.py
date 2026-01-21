@@ -27,7 +27,18 @@ class CaseDataAccess:
 
     @staticmethod
     def _normalize_frame(frame: pd.DataFrame) -> pd.DataFrame:
-        return frame.where(pd.notnull(frame), None)
+        normalized = frame.where(pd.notnull(frame), None)
+        return normalized.astype(object)
+
+    @staticmethod
+    def _clean_record(record: Dict) -> Dict:
+        cleaned = {}
+        for key, value in record.items():
+            if isinstance(value, float) and pd.isna(value):
+                cleaned[key] = None
+            else:
+                cleaned[key] = value
+        return cleaned
 
     def list_cases(self, limit: int, offset: int) -> Tuple[List[Dict], int]:
         dataset = self._dataset(self.paths.case_packet)
@@ -56,7 +67,8 @@ class CaseDataAccess:
         )
         slice_df = frame.iloc[offset: offset + limit]
         logger.info("Listed %s cases (offset=%s, limit=%s)", len(slice_df), offset, limit)
-        return slice_df.to_dict(orient="records"), total
+        records = [self._clean_record(row) for row in slice_df.to_dict(orient="records")]
+        return records, total
 
     def get_case_packet(self, case_id: str) -> Dict:
         dataset = self._dataset(self.paths.case_packet)
@@ -66,7 +78,7 @@ class CaseDataAccess:
         if frame.empty:
             raise CaseNotFoundError(case_id)
         row = frame.iloc[0].to_dict()
-        return row
+        return self._clean_record(row)
 
     def get_timeline(self, case_id: str) -> List[Dict]:
         dataset = self._dataset(self.paths.tx_timeline_daily)
@@ -76,4 +88,5 @@ class CaseDataAccess:
         if frame.empty:
             return []
         frame = frame.sort_values(by=["txn_date_utc", "instrument_type"], ascending=[True, True])
-        return frame.to_dict(orient="records")
+        records = [self._clean_record(row) for row in frame.to_dict(orient="records")]
+        return records

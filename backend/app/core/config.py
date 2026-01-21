@@ -23,10 +23,14 @@ class Settings(BaseSettings):
 
     default_limit: int = Field(default=50, ge=1)
     max_limit: int = Field(default=500, ge=1)
+    cors_allow_origins: str = Field(
+        default="http://localhost:5173,http://127.0.0.1:5173",
+        validation_alias="CORS_ALLOW_ORIGINS",
+    )
 
     class Config:
         env_prefix = ""
-        env_file = ".env"
+        env_file = str(Path.home() / ".aml_ai_investigator.env")
         env_file_encoding = "utf-8"
 
 

@@ -99,6 +99,11 @@ Environment variables (Docker or local):
 - `LLM_MODEL` (default: `gpt-5`)
 - `LOG_LEVEL` (default: `INFO`)
 
+For local testing without external calls, set `LLM_BASE_URL=mock` to use the built-in mock LLM provider.
+
+Create the config file before running:
+- Copy `env.sample` to `C:\Users\<you>\.aml_ai_investigator.env` and fill in values.
+
 ## Development
 Create/refresh case packets:
 ```

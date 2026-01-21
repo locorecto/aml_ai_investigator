@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, Depends, HTTPException
 
 from app.api.deps import get_case_data_access, get_copilot_service
@@ -5,6 +7,7 @@ from app.services.case_service import CaseDataAccess, CaseNotFoundError
 from app.services.copilot_service import CopilotService, CopilotValidationError
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 @router.post("/cases/{case_id}/copilot-summary")
@@ -23,6 +26,7 @@ def copilot_summary(
     except CopilotValidationError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
+        logger.exception("copilot error")
         raise HTTPException(status_code=500, detail="copilot error") from exc
 
     return result

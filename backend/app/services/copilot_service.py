@@ -63,7 +63,7 @@ class CopilotService:
         }
         return [
             LLMMessage(role="system", content=system_prompt),
-            LLMMessage(role="user", content=json.dumps(user_prompt)),
+            LLMMessage(role="user", content=self._safe_json(user_prompt)),
         ]
 
     def _parse_json(self, raw: str) -> Dict:
@@ -118,17 +118,30 @@ class CopilotService:
         run_path = self.settings.artifacts_path / "runs" / run_id
         run_path.mkdir(parents=True, exist_ok=True)
 
-        (run_path / "case_packet.json").write_text(json.dumps(case_packet, indent=2), encoding="utf-8")
-        (run_path / "policy_passages.json").write_text(json.dumps(policy_passages, indent=2), encoding="utf-8")
-        (run_path / "response.json").write_text(json.dumps(output, indent=2), encoding="utf-8")
+        (run_path / "case_packet.json").write_text(self._safe_json(case_packet), encoding="utf-8")
+        (run_path / "policy_passages.json").write_text(self._safe_json(policy_passages), encoding="utf-8")
+        (run_path / "response.json").write_text(self._safe_json(output), encoding="utf-8")
         (run_path / "raw_response.txt").write_text(raw, encoding="utf-8")
         (run_path / "metadata.json").write_text(
-            json.dumps(
+            self._safe_json(
                 {
                     "prompt_version": PROMPT_VERSION,
                     "model": self.settings.llm_model,
                 },
-                indent=2,
             ),
             encoding="utf-8",
         )
+
+    @staticmethod
+    def _safe_json(payload: object) -> str:
+        def _default(value):
+            try:
+                import numpy as np
+
+                if isinstance(value, (np.integer, np.floating)):
+                    return value.item()
+            except Exception:
+                pass
+            return str(value)
+
+        return json.dumps(payload, indent=2, default=_default)
