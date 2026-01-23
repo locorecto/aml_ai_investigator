@@ -1,3 +1,4 @@
+"""SQLite-backed vector store for policy embeddings."""
 import json
 import logging
 import sqlite3

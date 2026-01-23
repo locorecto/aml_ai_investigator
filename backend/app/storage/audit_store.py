@@ -1,3 +1,4 @@
+"""Audit artifact persistence helper."""
 import json
 from pathlib import Path
 

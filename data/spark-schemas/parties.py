@@ -1,3 +1,4 @@
+"""PySpark schema for parties dataset."""
 from pyspark.sql.types import StructType, StructField, StringType, DoubleType
 
 SCHEMA = StructType([

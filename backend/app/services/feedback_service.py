@@ -1,3 +1,4 @@
+"""Service layer for feedback persistence."""
 from datetime import datetime, timezone
 import json
 from pathlib import Path

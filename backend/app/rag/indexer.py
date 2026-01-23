@@ -1,3 +1,4 @@
+"""Policy corpus indexing pipeline."""
 import logging
 from pathlib import Path
 from typing import Iterable, List

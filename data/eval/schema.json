@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "required": ["case_id", "case_packet_path", "copilot_response_path"],
+  "properties": {
+    "case_id": { "type": "string" },
+    "case_packet_path": { "type": "string" },
+    "copilot_response_path": { "type": "string" },
+    "expected_disposition": { "type": "string" },
+    "expected_indicators": { "type": "array", "items": { "type": "string" } },
+    "usefulness_label": { "type": "number" },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

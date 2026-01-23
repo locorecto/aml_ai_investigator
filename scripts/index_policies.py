@@ -1,3 +1,4 @@
+"""Index the policy corpus into the local vector store."""
 import argparse
 import logging
 from pathlib import Path

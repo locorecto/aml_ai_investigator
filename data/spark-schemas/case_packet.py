@@ -1,3 +1,4 @@
+"""PySpark schema for case packet dataset."""
 from pyspark.sql.types import StructType, StructField, StringType, LongType, IntegerType, DoubleType, FloatType, BooleanType, ArrayType
 
 SCHEMA = StructType([

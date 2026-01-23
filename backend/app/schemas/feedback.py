@@ -1,3 +1,4 @@
+"""Pydantic schemas for investigator feedback."""
 from datetime import datetime
 from typing import List, Optional
 

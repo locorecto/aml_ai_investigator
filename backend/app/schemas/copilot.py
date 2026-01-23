@@ -1,3 +1,4 @@
+"""Pydantic schemas for copilot responses."""
 from typing import List, Optional
 
 from pydantic import BaseModel, Field

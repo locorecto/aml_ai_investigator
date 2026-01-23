@@ -1,3 +1,4 @@
+"""PySpark schema for tx timeline daily dataset."""
 from pyspark.sql.types import StructType, StructField, StringType, LongType, IntegerType, DoubleType, FloatType, BooleanType, ArrayType
 
 SCHEMA = StructType([

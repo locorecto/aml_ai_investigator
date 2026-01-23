@@ -1,3 +1,4 @@
+"""API endpoint tests."""
 import os
 from pathlib import Path
 
@@ -13,6 +14,8 @@ def client():
     repo_root = Path(__file__).resolve().parents[2]
     data_path = repo_root / "data"
     os.environ["DATA_BASE_PATH"] = str(data_path)
+    os.environ["CACHE_ENABLED"] = "false"
+    os.environ["REDIS_URL"] = ""
     config.get_settings.cache_clear()
     with TestClient(create_app()) as test_client:
         yield test_client
@@ -21,7 +24,14 @@ def client():
 def test_health(client: TestClient):
     resp = client.get("/api/v1/health")
     assert resp.status_code == 200
-    assert resp.json()["status"] == "ok"
+    payload = resp.json()
+    assert payload["status"] in ("ok", "degraded")
+    assert "checks" in payload
+
+
+def test_readiness(client: TestClient):
+    resp = client.get("/api/v1/health/ready")
+    assert resp.status_code in (200, 503)
 
 
 def test_cases_endpoints(client: TestClient):

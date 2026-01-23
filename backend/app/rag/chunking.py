@@ -1,3 +1,4 @@
+"""Chunking utilities for policy documents."""
 import re
 from dataclasses import dataclass
 from hashlib import sha256

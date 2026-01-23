@@ -1,3 +1,4 @@
+// Node wrapper to launch Vite with crypto shims in non-browser contexts.
 const crypto = require("crypto");
 const path = require("path");
 const { pathToFileURL } = require("url");

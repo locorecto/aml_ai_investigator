@@ -1,3 +1,4 @@
+"""RAG chunking tests."""
 from pathlib import Path
 
 from app.rag.chunking import PolicyDocument, chunk_policy_document

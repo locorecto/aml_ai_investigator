@@ -8,13 +8,16 @@ services:
     environment:
       DATA_BASE_PATH: /data
       LOG_LEVEL: INFO
-      LLM_API_KEY: ${LLM_API_KEY:-}
-      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.openai.com/v1}
-      LLM_MODEL: ${LLM_MODEL:-gpt-5}
       ARTIFACTS_PATH: /artifacts
+      CACHE_ENABLED: "true"
+      REDIS_URL: redis://redis:6379/0
+      CACHE_TTL_SECONDS: 60
     volumes:
       - ../../data:/data:ro
       - ../../artifacts:/artifacts:rw
+      - ${USERPROFILE}/.aml_ai_investigator.env:/root/.aml_ai_investigator.env:ro
+    depends_on:
+      - redis
   scheduler:
     build:
       context: ../..
@@ -33,3 +36,7 @@ services:
       - "5173:80"
     depends_on:
       - api
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"

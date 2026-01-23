@@ -1,3 +1,4 @@
+"""PySpark schema for merchants dataset."""
 from pyspark.sql.types import StructType, StructField, StringType
 
 SCHEMA = StructType([

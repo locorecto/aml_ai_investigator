@@ -1,3 +1,4 @@
+"""Investigator feedback API endpoints."""
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 
 from app.api.deps import get_case_data_access, get_feedback_service

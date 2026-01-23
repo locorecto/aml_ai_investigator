@@ -85,7 +85,7 @@ body::before {
 
 .grid {
   display: grid;
-  grid-template-columns: 1.1fr 1.6fr 1.3fr;
+  grid-template-columns: 15% 65% 20%;
   gap: 18px;
 }
 
@@ -116,6 +116,16 @@ body::before {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.panel-left .case-list {
+  overflow-x: hidden;
+}
+
+.panel-center {
+  max-height: calc(100vh - 180px);
+  min-height: calc(100vh - 180px);
+  overflow: auto;
 }
 
 .case-list {
@@ -152,6 +162,14 @@ body::before {
   display: block;
   font-size: 0.8rem;
   color: var(--muted);
+}
+
+.case-id {
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: 0.02em;
+  text-align: left;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .case-metrics {

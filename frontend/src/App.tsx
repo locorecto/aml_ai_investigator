@@ -1,3 +1,4 @@
+// Main investigator UI: triage list, evidence viewer, copilot, and feedback.
 import { useEffect, useMemo, useState } from "react";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1";
@@ -51,10 +52,11 @@ type CopilotSummary = {
     policy_citations?: string[];
   }>;
   policy_mapping: Array<{
-    policy: string;
+    policy?: string;
+    policy_ref?: string;
     citations: string[];
   }>;
-  missing_information: string[];
+  missing_information: Array<string | { text?: string; item?: string }>;
   recommended_disposition: string;
   confidence: number;
   uncertainty_reasons: string[];
@@ -122,6 +124,29 @@ const renderTable = (
       </table>
     </div>
   );
+};
+
+const toDisplayText = (value: unknown) => {
+  if (value === null || value === undefined) return "n/a";
+  if (typeof value === "string") return value;
+  if (typeof value === "number") return value.toString();
+  if (typeof value === "object") {
+    const record = value as { text?: string; item?: string };
+    return record.text || record.item || JSON.stringify(value);
+  }
+  return String(value);
+};
+
+const shortId = (value?: string | null) => {
+  if (!value) return "n/a";
+  let hash = 2166136261;
+  for (let i = 0; i < value.length; i += 1) {
+    hash ^= value.charCodeAt(i);
+    hash +=
+      (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+  }
+  const base36 = (hash >>> 0).toString(36);
+  return base36.slice(0, 10);
 };
 
 async function fetchJson<T>(path: string, options?: RequestInit): Promise<T> {
@@ -320,7 +345,7 @@ export default function App() {
               >
                 <div>
                   <strong>{item.party_name || "Unknown party"}</strong>
-                  <span>{item.case_id}</span>
+                  <span className="case-id">{shortId(item.case_id)}</span>
                 </div>
                 <div className="case-metrics">
                   <span>{item.risk_rating || "n/a"}</span>
@@ -345,7 +370,7 @@ export default function App() {
           <div className="panel-title">
             <h2>Evidence Packet</h2>
             <span className="muted">
-              {selectedCase ? selectedCase.case_id : "No case selected"}
+              {selectedCase ? shortId(selectedCase.case_id) : "No case selected"}
             </span>
           </div>
           {isLoadingPacket && <p className="muted">Loading packet...</p>}
@@ -507,7 +532,7 @@ export default function App() {
                 <h3>Policy Mapping</h3>
                 <ul>
                   {copilot.policy_mapping.map((item, idx) => (
-                    <li key={`pm-${idx}`}>{item.policy}</li>
+                    <li key={`pm-${idx}`}>{item.policy || item.policy_ref || "n/a"}</li>
                   ))}
                 </ul>
               </div>
@@ -515,7 +540,7 @@ export default function App() {
                 <h3>Missing Information</h3>
                 <ul>
                   {copilot.missing_information.map((item, idx) => (
-                    <li key={`mi-${idx}`}>{item}</li>
+                    <li key={`mi-${idx}`}>{toDisplayText(item)}</li>
                   ))}
                 </ul>
               </div>

@@ -1,3 +1,4 @@
+"""RAG retrieval tests."""
 from pathlib import Path
 
 from app.rag.embeddings import HashEmbeddingProvider

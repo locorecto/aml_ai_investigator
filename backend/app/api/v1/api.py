@@ -1,3 +1,4 @@
+"""Versioned API router registration."""
 from fastapi import APIRouter
 
 from app.api.v1.endpoints import cases, copilot, feedback, health

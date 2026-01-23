@@ -15,7 +15,8 @@ ENV PYTHONPATH=/app
 ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 ENV HOST=0.0.0.0
 ENV PORT=8000
+ENV UVICORN_WORKERS=1
 
 EXPOSE 8000
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn app.main:app --host ${HOST} --port ${PORT} --workers ${UVICORN_WORKERS} --proxy-headers --forwarded-allow-ips='*'"]

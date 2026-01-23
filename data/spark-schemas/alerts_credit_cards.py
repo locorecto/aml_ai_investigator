@@ -1,3 +1,4 @@
+"""PySpark schema for alerts credit cards dataset."""
 from pyspark.sql.types import StructType, StructField, StringType, LongType, DoubleType, IntegerType
 
 SCHEMA = StructType([

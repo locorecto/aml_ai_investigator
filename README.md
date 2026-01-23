@@ -8,10 +8,10 @@ Implemented phases:
 - Evidence API (FastAPI)
 - Policy/playbook RAG (local vector store)
 - Copilot summary MVP (strict JSON + validators)
+- Evaluation + controls (local eval runner + guardrails)
 
 Not implemented:
 - Investigator UX and human-in-the-loop workflow (TBD)
-- Evaluation/controls tooling (TBD)
 
 ## Architecture
 - Data pipeline (Spark) produces:
@@ -82,6 +82,12 @@ Copilot runs are stored under `artifacts/runs/` with:
 - validated JSON output
 - prompt/version metadata
 
+## Evaluation and Guardrails
+- Evaluation dataset format: `data/eval/README.md`
+- Eval runner: `python -m app.eval.runner --dataset data/eval/cases.jsonl`
+- Eval reports written to: `artifacts/eval/`
+- Guardrails include evidence citation validation and optional PII redaction (configurable).
+
 ## Deployment
 Docker Compose (API + scheduler):
 ```
@@ -89,6 +95,12 @@ docker compose -f infra/compose/docker-compose.yml up --build -d
 ```
 
 The scheduler container runs the daily Spark job via cron.
+
+### Cloud Deployment Notes
+- Set `ROOT_PATH` if the API is mounted behind an API Gateway path prefix.
+- Enable `PROXY_HEADERS_ENABLED=true` to honor `X-Forwarded-*` headers from a load balancer.
+- Scale horizontally with multiple API replicas behind a load balancer; Redis cache reduces repeat read latency.
+- Adjust `UVICORN_WORKERS` per container for CPU-bound throughput.
 
 ## Configuration
 Environment variables (Docker or local):
@@ -98,6 +110,11 @@ Environment variables (Docker or local):
 - `LLM_BASE_URL` (default: `https://api.openai.com/v1`)
 - `LLM_MODEL` (default: `gpt-5`)
 - `LOG_LEVEL` (default: `INFO`)
+- `CACHE_ENABLED` (enable Redis cache)
+- `REDIS_URL` (Redis connection string)
+- `CACHE_TTL_SECONDS` (cache TTL in seconds)
+- `ROOT_PATH` (reverse proxy base path)
+- `PROXY_HEADERS_ENABLED` (use forwarded headers)
 
 For local testing without external calls, set `LLM_BASE_URL=mock` to use the built-in mock LLM provider.
 
