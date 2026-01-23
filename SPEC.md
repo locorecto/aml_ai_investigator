@@ -1,4 +1,4 @@
-# AML AI Investigator — Project Specification
+# AML AI Investigator  Project Specification
 
 This document is the authoritative specification to recreate the repository from scratch.
 It reflects the current state of the project and all accepted prompts to date.
@@ -13,7 +13,7 @@ Provide an AML investigator platform that:
 - Includes evaluation/controls tooling for output quality and guardrails.
 
 ## 2) Scope (Implemented)
-### Phase 1 — Evidence API
+### Phase 1  Evidence API
 - Load existing datasets in `data/` and expose:
   - `GET /health`
   - `GET /health/ready`
@@ -24,7 +24,7 @@ Provide an AML investigator platform that:
 - Configurable CORS.
 - Use parquet outputs from the data pipeline.
 
-### Phase 2 — Policy/Playbook RAG
+### Phase 2  Policy/Playbook RAG
 - Local policy corpus in `policy_corpus/`.
 - Chunking with stable chunk IDs and metadata (doc_id, version, section).
 - Embedding provider abstraction.
@@ -32,7 +32,7 @@ Provide an AML investigator platform that:
 - Retrieval function: `retrieve_policy(case_packet) -> passages[]`.
 - Script: `scripts/index_policies.py`.
 
-### Phase 3 — Copilot MVP (Structured Output)
+### Phase 3  Copilot MVP (Structured Output)
 - Strict JSON output schema:
   - case_summary
   - key_indicators[]
@@ -54,7 +54,7 @@ Provide an AML investigator platform that:
 - Store run artifacts under `artifacts/runs/` (inputs, retrievals, outputs, raw).
 - Provider abstraction for LLM (OpenAI-compatible + Ollama + mock).
 
-### Phase 4 — Investigator UX + Feedback
+### Phase 4  Investigator UX + Feedback
 - UI (Docker-friendly, locally served) with:
   - case list (triage)
   - evidence packet viewer
@@ -64,7 +64,7 @@ Provide an AML investigator platform that:
 - Feedback audit trail stored under `artifacts/feedback/`.
 - API support to list and review feedback entries.
 
-### Phase 5 — Evaluation + Controls
+### Phase 5  Evaluation + Controls
 - Evaluation dataset format under `data/eval/` with JSONL schema.
 - Metrics:
   - factual consistency (citation coverage + evidence reference validity)
@@ -79,13 +79,13 @@ Provide an AML investigator platform that:
 - Reports written to `artifacts/eval/`.
 
 ## 3) Repository Layout
-- `backend/` — FastAPI service, RAG pipeline, copilot service, guardrails, eval runner, tests.
-- `frontend/` — React UI served via Nginx in Docker.
-- `data/` — source CSVs + parquet outputs + schema definitions.
-- `policy_corpus/` — policy guidance documents.
-- `artifacts/` — outputs (rag_index, runs, feedback, eval reports).
-- `infra/` — docker compose and Dockerfiles.
-- `scripts/` — indexing and evaluation utilities.
+- `backend/`  FastAPI service, RAG pipeline, copilot service, guardrails, eval runner, tests.
+- `frontend/`  React UI served via Nginx in Docker.
+- `data/`  source CSVs + parquet outputs + schema definitions.
+- `policy_corpus/`  policy guidance documents.
+- `artifacts/`  outputs (rag_index, runs, feedback, eval reports).
+- `infra/`  docker compose and Dockerfiles.
+- `scripts/`  indexing and evaluation utilities.
 
 ## 4) Data Pipeline
 - Spark pipeline builds:
@@ -169,11 +169,11 @@ Provide an AML investigator platform that:
 - Spark tests can be enabled with `RUN_SPARK_TESTS=1`.
 
 ## 13) Artifacts
-- `artifacts/rag_index/` — vector store and policy index files.
-- `artifacts/runs/` — copilot inputs/outputs (JSON + raw response).
-- `artifacts/runs_failed/` — failed outputs with error logs.
-- `artifacts/feedback/` — feedback entries.
-- `artifacts/eval/` — evaluation reports.
+- `artifacts/rag_index/`  vector store and policy index files.
+- `artifacts/runs/`  copilot inputs/outputs (JSON + raw response).
+- `artifacts/runs_failed/`  failed outputs with error logs.
+- `artifacts/feedback/`  feedback entries.
+- `artifacts/eval/`  evaluation reports.
 
 ## 14) Rebuild Steps (High-Level)
 1) Create repository structure as specified above.
